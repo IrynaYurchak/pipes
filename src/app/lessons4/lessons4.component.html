@@ -1,0 +1,52 @@
+<div class="top">
+  <div class="description">
+    <h3>My phone book!</h3>
+  </div>
+  <div class="input-box">
+    <input type="text" class="text" [(ngModel)]="text" placeholder="Search text goes here">
+    <button class="btn-add" (click)="toggleAddContact()">Add phone</button>
+  </div>
+</div>
+
+<div>
+  <table class="content">
+    <thead class="name">
+      <tr>
+        <th><button class="btn-sort" (click)="sortFirstName()">First name</button></th>
+        <th><button class="btn-sort" (click)="sortLastName()">Last name</button></th>
+        <th><button class="btn-sort" (click)="sortNumber()">Number</button></th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of lists | search:text | sort:'firstName':firstNameSortDirection | sort:'lastName':lastNameSortDirection | sort:'number':numberSortDirection; let i = index">
+        <td>{{list.firstName}}</td>
+        <td>{{list.lastName}}</td>
+        <td>{{list.number}}</td>
+        <td><button class="btn-edit" (click)="editContact(i)">Edit</button></td>
+        <td><button class="btn-delete" (click)="deleteContact(i)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="addContactVisible" class="modal-block">
+  <div class="newContent">
+    <h4>Add contact</h4>
+    <input type="text" class="newContact" [(ngModel)]="firstName" placeholder="First name goes here">
+    <input type="text" class="newContact" [(ngModel)]="lastName" placeholder="Last name goes here">
+    <input type="text" class="newContact" [(ngModel)]="number" placeholder="Number goes here">
+    <button type="button" class="btn-save" (click)="saveContact()">Save</button>
+  </div>
+</div>
+
+<div *ngIf="editContactVisible" class="modal-block">
+  <div class="newContent">
+    <h4>Add contact</h4>
+    <input type="text" class="newContact" [(ngModel)]="firstName" placeholder="First name goes here">
+    <input type="text" class="newContact" [(ngModel)]="lastName" placeholder="Last name goes here">
+    <input type="text" class="newContact" [(ngModel)]="number" placeholder="Number goes here">
+    <button type="button" class="btn-save" (click)="updateContact()">Save</button>
+  </div>
+</div>
